@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
+sky_top_color = Color(0.02, 0.03, 0.05, 1)
+sky_horizon_color = Color(0.05, 0.06, 0.08, 1)
+ground_bottom_color = Color(0.02, 0.02, 0.03, 1)
+ground_horizon_color = Color(0.04, 0.05, 0.06, 1)
+energy_multiplier = 0.6
+
+[sub_resource type="Sky" id="Sky"]
+sky_material = SubResource("SkyMat")
+
+[sub_resource type="Environment" id="Env"]
+background_mode = 2
+background_color = Color(0.06, 0.07, 0.09, 1)
+sky = SubResource("Sky")
+ambient_light_source = 0
+ambient_light_color = Color(0.22, 0.24, 0.28, 1)
+ambient_light_energy = 0.8
+tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 1.2
+ssao_intensity = 1.2
+glow_enabled = false
+
+[node name="LightingRig" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env")
+
+[node name="KeyLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-45, 45, 0)
+light_color = Color(1.0, 0.93, 0.82, 1)
+light_energy = 1.35
+light_indirect_energy = 0.2
+light_angular_distance = 0.6
+shadow_enabled = true
+
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-20, -135, 0)
+light_color = Color(0.55, 0.72, 1.0, 1)
+light_energy = 0.65
+light_indirect_energy = 0.15
+light_specular = 0.35
+light_angular_distance = 1.0
+shadow_enabled = false
+
+[node name="RimLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-30, 180, 0)
+light_color = Color(0.70, 1.0, 0.85, 1)
+light_energy = 0.85
+light_indirect_energy = 0.05
+light_specular = 1.1
+light_angular_distance = 0.4
+shadow_enabled = false

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c2gc157qg1md2"]
+
+[ext_resource type="Script" uid="uid://cpdq2qrdqvkr1" path="res://features/character/scripts/player_controller.gd" id="1_lhvpj"]
+[ext_resource type="Script" uid="uid://bfi3txbfwbnii" path="res://features/visual/scripts/character_visual_controller.gd" id="2_urxh5"]
+[ext_resource type="Shader" uid="uid://bi5mxq03vti3n" path="res://shaders/dev_pearl.gdshader" id="3_8u0ha"]
+[ext_resource type="Script" uid="uid://7mfqvwre4vr3" path="res://features/camera/scripts/third_person_camera_controller.gd" id="3_untev"]
+[ext_resource type="Script" uid="uid://d01y6lppb363b" path="res://features/movement/scripts/locomotion_motor.gd" id="4_st7cl"]
+[ext_resource type="Script" uid="uid://bjul5ntwwj6k" path="res://features/movement/resources/movement_config.gd" id="5_oj5gq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oj5gq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0st2n"]
+render_priority = 0
+shader = ExtResource("3_8u0ha")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oj5gq"]
+
+[sub_resource type="Resource" id="Resource_8u0ha"]
+script = ExtResource("5_oj5gq")
+metadata/_custom_type_script = "uid://bjul5ntwwj6k"
+
+[node name="Player" type="CharacterBody3D" unique_id=2139705197]
+script = ExtResource("1_lhvpj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1818024139]
+shape = SubResource("CapsuleShape3D_oj5gq")
+
+[node name="VisualRoot" type="Node3D" parent="." unique_id=1067923503]
+script = ExtResource("2_urxh5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VisualRoot" unique_id=1849673974]
+material_override = SubResource("ShaderMaterial_0st2n")
+mesh = SubResource("CapsuleMesh_oj5gq")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=743560444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+script = ExtResource("3_untev")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=1376694907]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0)
+spring_length = 8.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1399524486]
+current = true
+
+[node name="MovementMotor" type="Node" parent="." unique_id=1917503119]
+script = ExtResource("4_st7cl")
+config = SubResource("Resource_8u0ha")

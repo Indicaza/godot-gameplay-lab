@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://q1yqd3xmd1ff"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bu0v1"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+energy_multiplier = 0.0
+
+[sub_resource type="Sky" id="Sky_iwpo4"]
+sky_material = SubResource("ProceduralSkyMaterial_bu0v1")
+
+[sub_resource type="Environment" id="Environment_fb3t6"]
+background_color = Color(0.105882354, 0.11764706, 0.14117648, 1)
+sky = SubResource("Sky_iwpo4")
+ambient_light_color = Color(0.16862746, 0.19215687, 0.22745098, 1)
+ambient_light_energy = 0.2
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bu0v1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bu0v1"]
+albedo_color = Color(0.33288068, 0.3328807, 0.33288056, 1)
+metallic = 0.71
+metallic_specular = 0.17
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_bu0v1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bu0v1"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwpo4"]
+albedo_color = Color(0.41960785, 0.4392157, 0.47058824, 1)
+metallic_specular = 0.0
+roughness = 0.91
+uv1_triplanar_sharpness = 0.61557126
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_iwpo4"]
+material = SubResource("StandardMaterial3D_iwpo4")
+uv2_padding = 0.83
+
+[node name="Node3D" type="Node3D" unique_id=2031111533]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=890112266]
+environment = SubResource("Environment_fb3t6")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1510899102]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=416543721]
+shape = SubResource("SphereShape3D_bu0v1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1874761509]
+material_override = SubResource("StandardMaterial3D_bu0v1")
+mesh = SubResource("SphereMesh_bu0v1")
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1077586345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=2051673781]
+shape = SubResource("BoxShape3D_bu0v1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1568720243]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("BoxMesh_iwpo4")
+
+[node name="KeyLight" type="DirectionalLight3D" parent="." unique_id=854201514]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 45, 0)
+light_color = Color(1, 0.94509804, 0.8392157, 1)
+light_energy = 1.2
+light_indirect_energy = 0.15
+light_volumetric_fog_energy = 0.0
+light_angular_distance = 0.5
+sky_mode = 1
+
+[node name="Fill Light" type="DirectionalLight3D" parent="." unique_id=1856926971]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -135, 0)
+light_color = Color(0.8117647, 0.8784314, 1, 1)
+light_energy = 0.22
+light_indirect_energy = 0.5
+light_volumetric_fog_energy = 4.5
+light_angular_distance = 20.0
+light_specular = 3.5
+sky_mode = 1
+
+[node name="RimLight" type="DirectionalLight3D" parent="." unique_id=530248378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 220, 0)
+light_energy = 0.65
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 4.5
+light_angular_distance = 20.0
+light_specular = 1.2
+sky_mode = 1

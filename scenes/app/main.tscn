@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c4iiivtubln00"]
+
+[ext_resource type="PackedScene" uid="uid://xujcuow3by4i" path="res://levels/prototypes/movement_lab.tscn" id="1"]
+
+[node name="Main" type="Node3D" unique_id=2054351994]
+
+[node name="MovementLab" parent="." unique_id=851127877 instance=ExtResource("1")]

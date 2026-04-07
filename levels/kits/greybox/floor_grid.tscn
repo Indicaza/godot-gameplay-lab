@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://6tvwy52k1m2p"]
+
+[ext_resource type="Shader" uid="uid://bpnx4b5lmhb7b" path="res://shaders/grid_floor.gdshader" id="1_fdtri"]
+
+[sub_resource type="BoxShape3D" id="FloorShape"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y30gy"]
+render_priority = 0
+shader = ExtResource("1_fdtri")
+shader_parameter/base_color = Color(0.09, 0.1, 0.12, 1)
+shader_parameter/line_color_1m = Color(0.22, 0.24, 0.28, 1)
+shader_parameter/line_color_5m = Color(0.4, 0.44, 0.5, 1)
+shader_parameter/line_color_10m = Color(0.92, 0.94, 0.98, 1)
+shader_parameter/axis_x_color = Color(0.85, 0.2, 0.2, 1)
+shader_parameter/axis_z_color = Color(0.2, 0.45, 0.9, 1)
+shader_parameter/spacing_1m = 1.0
+shader_parameter/spacing_5m = 5.0
+shader_parameter/spacing_10m = 10.0
+shader_parameter/width_1m = 0.012
+shader_parameter/width_5m = 0.03
+shader_parameter/width_10m = 0.06
+shader_parameter/axis_width = 0.08
+shader_parameter/show_axes = true
+shader_parameter/fade_with_distance = true
+shader_parameter/fade_start = 60.0
+shader_parameter/fade_end = 140.0
+shader_parameter/roughness_value = 0.96
+shader_parameter/metallic_value = 0.0
+
+[sub_resource type="BoxMesh" id="FloorMesh"]
+material = SubResource("ShaderMaterial_y30gy")
+
+[node name="FloorGrid" type="Node3D" unique_id=1149526017]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=802666653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=973229317]
+shape = SubResource("FloorShape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=2014319508]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("FloorMesh")

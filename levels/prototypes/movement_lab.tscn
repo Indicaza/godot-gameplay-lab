@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://xujcuow3by4i"]
+
+[ext_resource type="PackedScene" uid="uid://c2gc157qg1md2" path="res://features/character/scenes/player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://6tvwy52k1m2p" path="res://levels/kits/greybox/floor_grid.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/environment/lighting_rig.tscn" id="3"]
+
+[node name="MovementLab" type="Node3D" unique_id=646173283]
+
+[node name="LightingRig" parent="." unique_id=465960171 instance=ExtResource("3")]
+
+[node name="FloorGrid" parent="." unique_id=953902480 instance=ExtResource("2")]
+
+[node name="Player" parent="." unique_id=1282081193 instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=336356937]
+transform = Transform3D(1, 0, 0, 0, 0.94, -0.34, 0, 0.34, 0.94, 0, 6, 10)
